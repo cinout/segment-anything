@@ -9,5 +9,6 @@ mask_generator = SamAutomaticMaskGenerator(sam)
 image = Image.open("./datasets/loco/breakfast_box/train/good/000.png")
 image_np = asarray(image)
 
+print(f">>> image_np: {image_np}")
 masks = mask_generator.generate(image_np)
 print(masks)

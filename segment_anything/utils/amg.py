@@ -115,7 +115,7 @@ def mask_to_rle_pytorch(tensor: torch.Tensor) -> List[Dict[str, Any]]:
 
     # Compute change indices
     diff = tensor[:, 1:] ^ tensor[:, :-1]
-    change_indices = diff.nonzero()
+    change_indices = torch.nonzero(diff)
 
     # Encode run length
     out = []
