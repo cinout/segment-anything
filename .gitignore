@@ -8,9 +8,12 @@ _ext
 *.so
 *.dll
 *.egg-info/
+*.png
 build/
 dist/
 wheels/
+datasets/
+output*/
 
 # pytorch/python/numpy formats
 *.pth
