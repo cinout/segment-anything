@@ -162,8 +162,6 @@ class SamAutomaticMaskGenerator:
         # Generate masks
         mask_data = self._generate_masks(image)
 
-        print(f">>> finish generate masks")
-
         # Filter small disconnected regions and holes in masks
         if self.min_mask_region_area > 0:
             mask_data = self.postprocess_small_regions(
@@ -171,8 +169,6 @@ class SamAutomaticMaskGenerator:
                 self.min_mask_region_area,
                 max(self.box_nms_thresh, self.crop_nms_thresh),
             )
-
-        print(f">>> finish filter masks")
 
         # Encode masks
         if self.output_mode == "coco_rle":
@@ -183,8 +179,6 @@ class SamAutomaticMaskGenerator:
             mask_data["segmentations"] = [rle_to_mask(rle) for rle in mask_data["rles"]]
         else:
             mask_data["segmentations"] = mask_data["rles"]
-
-        print(f">>> finish encode masks")
 
         # Write mask records
         curr_anns = []
@@ -200,7 +194,6 @@ class SamAutomaticMaskGenerator:
             }
             curr_anns.append(ann)
 
-        print(f">>> finish everything with: {curr_anns}")
         return curr_anns
 
     def _generate_masks(self, image: np.ndarray) -> MaskData:
