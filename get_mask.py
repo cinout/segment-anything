@@ -39,14 +39,14 @@ for category in categories:
     #     segmentation_results = np.load(f)
 
     if len(masks) > 0:
-        # masks = sorted(masks, key=(lambda x: x["area"]), reverse=True)
+        masks = sorted(masks, key=(lambda x: x["area"]), reverse=True)  # TODO: sort
         segmentation_results = np.array([item["segmentation"] for item in masks])
 
         image = image.convert("RGBA")
         height = segmentation_results[0].shape[0]
         width = segmentation_results[0].shape[1]
 
-        for i, seg in enumerate(segmentation_results[:20]):
+        for i, seg in enumerate(segmentation_results[:20]):  # TODO:
             mask = np.zeros(
                 (
                     height,
@@ -64,7 +64,7 @@ for category in categories:
             ]
 
             mask = Image.fromarray(mask)
-            if i <= 10:
+            if i <= 20:
                 mask.save(f"{output_folder}/{category}_mask_{i}.png", "PNG")
 
             image.paste(mask, (0, 0), mask)
